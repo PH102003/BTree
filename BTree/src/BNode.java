@@ -3,6 +3,11 @@ public class BNode<T extends Comparable<T>> {
     private Object[] infos;
     private BNode<T>[] filhos;
     
+    public BNode (int m, int n) {
+       infos = new Object[m-1];
+       filhos = new BNode[m];
+       this.n = n;
+   }
     public int getN() {
         return n;
     }
@@ -20,11 +25,6 @@ public class BNode<T extends Comparable<T>> {
     }
     public void setFilhos(BNode<T>[] filhos) {
         this.filhos = filhos;
-    }
-     public BNode (int m) {
-        infos = new Object[m-1];
-        filhos = new BNode[m];
-    
     }
 
     }
