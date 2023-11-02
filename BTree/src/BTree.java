@@ -6,7 +6,7 @@ public class BTree<T extends Comparable<T>> {
         return raiz == null;
     }
 
-    public void insercaoOrdenada(T chave) {
+    public void insercao(T chave) {
         if (raiz.getInfos() == null) {
             raiz = new BNode<>(5, 1);
              // ordem 5 , m = 5
@@ -14,13 +14,18 @@ public class BTree<T extends Comparable<T>> {
              // settar número de chaves (com base no 'n' que é o número de chaves)
             // agora vou inserir na primeira posição. Como a árvore está vázia, a primeira posição está vázia
             raiz.getInfos()[0] = chave;
-        }
-        else{
-
+        }else{
+            raiz = insercao(raiz, chave);
         }
     }
 
-    private BNode<T> insercaoOrdenada(BNode<T> raiz, T chave) {
+    private BNode<T> insercao(BNode<T> raiz, T chave) {
+        return raiz;
+    }
+    private void insercaoEmNo(BNode <T> raiz, T chave){
+        
+    }
+    private BNode<T> cisao(BNode<T> raiz, T chave){
         return raiz;
     }
 
