@@ -1,33 +1,51 @@
-public class BTree <T extends Comparable<T>> {
+public class BTree<T extends Comparable<T>> {
     private BNode<T> raiz;
-    //caso em que o nó é null    
-    public boolean isEmpty(){
+
+    // caso em que o nó é null
+    public boolean isEmpty() {
         return raiz == null;
     }
-    public void inserir(T chave){
-        if(raiz.getInfos()== null){
-            raiz = new BNode<>();
+
+    public void insercaoOrdenada(BNode<T> raiz, T chave) {
+        if (raiz.getInfos() == null) {
+            raiz = new BNode<>(5, 1);
+             // ordem 5 , m = 5
+             // primeira inserção, n = 1
+             // settar número de chaves (com base no 'n' que é o número de chaves)
+            // agora vou inserir na primeira posição. Como a árvore está vázia, a primeira posição está vázia
+            raiz.getInfos()[0] = chave;
         }
     }
-    public void remover(){
+
+    private void insercaoOrdenada() {
 
     }
-    public void maiorChave(){
+
+    public void remover() {
 
     }
-    public void menorChave(){
+
+    public void maiorChave() {
 
     }
-    public void altura(){
+
+    public void menorChave() {
 
     }
-    public void encontrarChave(int chave){
+
+    public void altura() {
 
     }
-    public void buscaPorNivel(){
+
+    public void encontrarChave(int chave) {
 
     }
-    public void buscaPreOrdem(){
+
+    public void buscaPorNivel() {
+
+    }
+
+    public void buscaPreOrdem() {
 
     }
 

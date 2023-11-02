@@ -2,12 +2,19 @@ public class BNode<T extends Comparable<T>> {
     private int n;
     private Object[] infos;
     private BNode<T>[] filhos;
-    
+    private int m;
     public BNode (int m, int n) {
-       infos = new Object[m-1];
-       filhos = new BNode[m];
-       this.n = n;
-   }
+        infos = new Object[m-1];
+        filhos = new BNode[m];
+        this.n = n;
+    }
+    
+    public int getM() {
+        return m;
+    }
+    public void setM(int m) {
+        this.m = m;
+    }
     public int getN() {
         return n;
     }
