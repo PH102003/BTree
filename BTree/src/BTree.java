@@ -6,7 +6,7 @@ public class BTree<T extends Comparable<T>> {
         return raiz == null;
     }
 
-    public void insercao(T chave) {
+    public void insercaoB(T chave) {
         if (raiz.getInfos() == null) {
             raiz = new BNode<>(5, 1);
              // ordem 5 , m = 5
@@ -20,6 +20,13 @@ public class BTree<T extends Comparable<T>> {
     }
 
     private BNode<T> insercao(BNode<T> raiz, T chave) {
+        if(raiz.getN() < 5){
+            insercaoEmNo(raiz, chave);
+        }else{
+            BNode<T> nocisao = cisao(raiz, chave);
+            //insercao da chave que subiu por conta da cisão
+            raiz = insercao(raiz, (T) nocisao.getInfos()[0]);
+        }
         return raiz;
     }
     private void insercaoEmNo(BNode <T> raiz, T chave){
@@ -41,9 +48,22 @@ public class BTree<T extends Comparable<T>> {
 
     }
 
-    public void altura() {
-
+    public int calcularAltura(BNode<T> node) {
+        if (node == null) {
+            return -1; // árvore vazia, altura -1
+        }
+        
+        int altura = 0;
+        BNode<T> noAtual = node;
+        
+        while (noAtual.getFilhos()[0] != null) {
+            altura++;
+            noAtual = noAtual.getFilhos()[0];
+        }
+        
+        return altura;
     }
+    
 
     public void encontrarChave(int chave) {
 
