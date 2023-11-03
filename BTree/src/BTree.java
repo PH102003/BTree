@@ -89,15 +89,16 @@ public class BTree<T extends Comparable<T>> {
     }
     
 
-    public int calcularAltura(BNode<T> node) {
-        if (node == null) {
+    public int calcularAltura(BNode<T> raiz) {
+        if (raiz == null) {
             return -1; // árvore vazia, altura = -1
         }
         
         int altura = 0;
-        BNode<T> noAtual = node;
+        BNode<T> noAtual = raiz;
         
         while (noAtual.getFilhos()[0] != null) {
+          //incremento do contador de altura enquanto um filho não apontar pra null
             altura++;
             noAtual = noAtual.getFilhos()[0];
         }
@@ -110,9 +111,49 @@ public class BTree<T extends Comparable<T>> {
 
     }
 
-    public void buscaPorNivel() {
-
+    public int passeioPorNivel(BNode<T> raiz) {
+        if (raiz == null) {
+            return 0; // árvore vazia
+        }
+        int niveis = 0;
+        //contador de niveis 
+        while (true) {
+            boolean nivelVazio = true;
+            int i;
+    
+            for (i = 0; i < raiz.getN(); i++) {
+                if (raiz.getFilhos()[i] != null) {
+                    // Realize qualquer operação desejada com o nó atual, como imprimir seu valor.
+                    nivelVazio = false;
+                }
+            }
+    
+            if (raiz.getFilhos()[i] != null) {
+                // O último filho
+                raiz = raiz.getFilhos()[i];
+            } else {
+                // Se não houver mais filhos, suba um nível
+                while (i >= 0 && raiz.getFilhos()[i] == null) {
+                    i--;
+                }
+    
+                if (i < 0) {
+                    break; // Terminou o passeio por nível
+                }
+    
+                raiz = raiz.getFilhos()[i];
+                
+                if (nivelVazio) {
+                    break; // Não há mais nós a serem visitados
+                }
+                
+                niveis++;
+            }
+        }
+        
+        return niveis;
     }
+    
 
     public void buscaPreOrdem() {
 
