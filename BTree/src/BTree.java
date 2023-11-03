@@ -33,24 +33,65 @@ public class BTree<T extends Comparable<T>> {
         
     }
     private BNode<T> cisao(BNode<T> raiz, T chave){
-        return raiz;
+        BNode<T> novoNo = new BNode<>(raiz.getM(),raiz.getN());
+        int posicaoNo = 0;
+        while (posicaoNo < raiz.getN() && chave.compareTo((T) raiz.getInfos()[posicaoNo]) > 0) {
+            posicaoNo++;
+        }
+        int noDoMeio = raiz.getN()/2;
+        for (int i = noDoMeio + 1; i < raiz.getN(); i++) {
+            novoNo.getInfos()[i - noDoMeio - 1] = raiz.getInfos()[i];
+            raiz.getInfos()[i] = null; // Limpe as chaves do nó original
+        }
+    
+        // Atualize o número de chaves nos dois nós
+        raiz.setN(noDoMeio);
+        novoNo.setN(noDoMeio);
+    
+        // Verifique em qual nó a chave pertence
+        BNode<T> noDestino;
+        if (posicaoNo <= noDoMeio) {
+            noDestino = raiz;
+        } else {
+            noDestino = novoNo;
+            posicaoNo -= noDoMeio + 1;
+        }
+    
+        return novoNo;
     }
 
     public void remover() {
 
     }
 
-    public void maiorChave() {
+    public BNode<T> maiorChave(BNode<T> raiz) {
+        if(raiz == null){
+            return null; //árvore vazia
+        }
+        //pega o último endereço do filho (mais a direita)
+        while(raiz.getFilhos()[raiz.getN()] != null){
+            raiz = raiz.getFilhos()[raiz.getN()];
+        }
+        return raiz;
 
     }
 
-    public void menorChave() {
-
+    public BNode<T> MenorChave(BNode<T> raiz) {
+        if (raiz == null) {
+            return null; // árvore vazia
+        }
+        //pega o primeiro endereço do filho (mais a esquerda)
+        while (raiz.getFilhos()[0] != null) {
+            raiz = raiz.getFilhos()[0];
+        }
+        
+        return raiz;
     }
+    
 
     public int calcularAltura(BNode<T> node) {
         if (node == null) {
-            return -1; // árvore vazia, altura -1
+            return -1; // árvore vazia, altura = -1
         }
         
         int altura = 0;
