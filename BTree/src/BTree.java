@@ -123,16 +123,16 @@ public class BTree<T extends Comparable<T>> {
     
             for (i = 0; i < raiz.getN(); i++) {
                 if (raiz.getFilhos()[i] != null) {
-                    // Realize qualquer operação desejada com o nó atual, como imprimir seu valor.
+                    //nivel não está vazio
                     nivelVazio = false;
                 }
             }
     
             if (raiz.getFilhos()[i] != null) {
-                // O último filho
+                // último filho
                 raiz = raiz.getFilhos()[i];
             } else {
-                // Se não houver mais filhos, suba um nível
+                // se não houver mais filhos, suba um nível
                 while (i >= 0 && raiz.getFilhos()[i] == null) {
                     i--;
                 }
@@ -144,7 +144,7 @@ public class BTree<T extends Comparable<T>> {
                 raiz = raiz.getFilhos()[i];
                 
                 if (nivelVazio) {
-                    break; // Não há mais nós a serem visitados
+                    break; // não há mais nós pra serem visitados
                 }
                 
                 niveis++;
@@ -155,8 +155,20 @@ public class BTree<T extends Comparable<T>> {
     }
     
 
-    public void buscaPreOrdem() {
-
+    public void passeioPreOrdem(BNode<T> raiz) {
+        if (raiz == null) {
+            return;
+        }
+    
+        for (int i = 0; i < raiz.getN(); i++) {
+            // imprimi valor da chave
+            System.out.print(raiz.getInfos()[i] + " ");
+        }
+    
+        for (int i = 0; i <= raiz.getN(); i++) {
+            passeioPreOrdem(raiz.getFilhos()[i]);
+        }
     }
+    
 
 }
