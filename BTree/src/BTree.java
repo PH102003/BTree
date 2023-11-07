@@ -39,9 +39,10 @@ public class BTree<T extends Comparable<T>> {
             posicaoNo++;
         }
         int noDoMeio = raiz.getN()/2;
+        //partição do nó "na metade"
         for (int i = noDoMeio + 1; i < raiz.getN(); i++) {
             novoNo.getInfos()[i - noDoMeio - 1] = raiz.getInfos()[i];
-            raiz.getInfos()[i] = null; // Limpe as chaves do nó original
+            raiz.getInfos()[i] = null; // limpa as chaves do nó original
         }
     
         // Atualize o número de chaves nos dois nós
