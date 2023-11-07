@@ -77,7 +77,7 @@ public class BTree<T extends Comparable<T>> {
 
     }
 
-    public BNode<T> MenorChave(BNode<T> raiz) {
+    public BNode<T> menorChave(BNode<T> raiz) {
         if (raiz == null) {
             return null; // árvore vazia
         }
@@ -108,9 +108,30 @@ public class BTree<T extends Comparable<T>> {
     }
     
 
-    public void encontrarChave(int chave) {
-
+    public BNode<T> encontrarValor(BNode<T> raiz, T valorProcurado) {
+        if (raiz == null) {
+            return null;  // árvore vazia, null
+        }
+    
+        int i = 0;
+        while (i < raiz.getN() && valorProcurado.compareTo((T) raiz.getInfos()[i]) > 0) {
+            i++;
+        }
+    
+        if (i < raiz.getN() && valorProcurado.compareTo((T) raiz.getInfos()[i]) == 0) {
+            // valor foi encontrado no indice i do nó atual
+            return raiz;
+        }
+    
+        if (raiz.getFilhos()[i] != null) {
+            // busca recursiva do filho apropriado
+            return encontrarValor(raiz.getFilhos()[i], valorProcurado);
+        } else {
+            // valor não foi encontrado na árvore
+            return null;
+        }
     }
+    
 
     public int passeioPorNivel(BNode<T> raiz) {
         if (raiz == null) {
